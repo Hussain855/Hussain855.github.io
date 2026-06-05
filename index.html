@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Muhammad Hussain — Network & Cloud Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#060a10;--surface:#0d1520;--border:#1a2d44;--accent:#00d4ff;--accent2:#00ff9d;--accent3:#ff6b35;--text:#c8dae8;--muted:#4a6a82;--mono:'Share Tech Mono',monospace;--sans:'Syne',sans-serif;}
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;cursor:none;}
+    .cursor{width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.1s;mix-blend-mode:screen;}
+    .cursor-ring{width:36px;height:36px;border:1px solid var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;opacity:0.5;}
+    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(6,10,16,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-logo{font-family:var(--mono);color:var(--accent);font-size:0.9rem;letter-spacing:2px;}
+    .nav-links{display:flex;gap:2.5rem;}
+    .nav-links a{font-family:var(--mono);font-size:0.78rem;color:var(--muted);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--accent);}
+    #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 4rem;position:relative;z-index:1;}
+    .hero-tag{font-family:var(--mono);font-size:0.75rem;color:var(--accent2);letter-spacing:3px;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.2s forwards;}
+    .hero-name{font-size:clamp(3rem,7vw,6.5rem);font-weight:800;line-height:1;letter-spacing:-2px;opacity:0;animation:fadeUp 0.8s 0.4s forwards;}
+    .hero-name span{color:var(--accent);}
+    .hero-title{font-family:var(--mono);font-size:clamp(0.85rem,2vw,1.1rem);color:var(--muted);margin-top:1.2rem;opacity:0;animation:fadeUp 0.8s 0.6s forwards;}
+    .hero-title span{color:var(--accent3);}
+    .hero-desc{max-width:560px;font-size:1rem;line-height:1.8;color:var(--text);margin-top:2rem;opacity:0;animation:fadeUp 0.8s 0.8s forwards;}
+    .hero-cta{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 1s forwards;}
+    .btn{font-family:var(--mono);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;padding:0.85rem 2rem;border:1px solid var(--accent);color:var(--accent);background:transparent;text-decoration:none;cursor:none;transition:background 0.2s,color 0.2s;position:relative;overflow:hidden;}
+    .btn::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform 0.25s;z-index:-1;}
+    .btn:hover::before{transform:translateX(0);}
+    .btn:hover{color:var(--bg);}
+    .btn-ghost{border-color:var(--border);color:var(--muted);}
+    .btn-ghost::before{background:var(--border);}
+    .btn-ghost:hover{color:var(--text);}
+    .status-badge{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.72rem;color:var(--accent2);border:1px solid rgba(0,255,157,0.3);padding:0.4rem 1rem;margin-top:2rem;opacity:0;animation:fadeUp 0.8s 1.2s forwards;}
+    .status-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite;}
+    .hero-deco{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:380px;height:380px;border:1px solid var(--border);border-radius:50%;opacity:0.25;animation:spinY 30s linear infinite;}
+    .hero-deco::before,.hero-deco::after{content:'';position:absolute;border:1px solid var(--accent);border-radius:50%;}
+    .hero-deco::before{inset:30px;opacity:0.4;animation:spinY 20s linear infinite reverse;}
+    .hero-deco::after{inset:80px;opacity:0.6;border-color:var(--accent2);}
+    section{position:relative;z-index:1;padding:6rem 3rem;}
+    .section-label{font-family:var(--mono);font-size:0.7rem;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.75rem;}
+    .section-title{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:3rem;}
+    #about{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+    .about-text p{color:var(--muted);line-height:1.9;font-size:0.98rem;margin-bottom:1.2rem;}
+    .about-text p span{color:var(--accent);}
+    .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
+    .stat-box{background:var(--bg);padding:2rem;text-align:center;}
+    .stat-num{font-size:2.2rem;font-weight:800;color:var(--accent);display:block;}
+    .stat-label{font-family:var(--mono);font-size:0.68rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:0.4rem;display:block;}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5px;background:var(--border);border:1px solid var(--border);}
+    .skill-card{background:var(--bg);padding:2rem;transition:background 0.2s;}
+    .skill-card:hover{background:#101c2a;}
+    .skill-card-icon{font-size:1.8rem;margin-bottom:1rem;}
+    .skill-card h3{font-size:0.9rem;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem;}
+    .skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+    .tag{font-family:var(--mono);font-size:0.7rem;padding:0.3rem 0.7rem;border:1px solid var(--border);color:var(--muted);letter-spacing:1px;}
+    .tag.hot{border-color:rgba(0,212,255,0.4);color:var(--accent);background:rgba(0,212,255,0.05);}
+    #certs{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+    .cert-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+    .cert-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg);padding:1.5rem 2rem;transition:background 0.2s;flex-wrap:wrap;gap:1rem;}
+    .cert-item:hover{background:#0d1b2a;}
+    .cert-left{display:flex;align-items:center;gap:1.5rem;}
+    .cert-num{font-family:var(--mono);font-size:0.7rem;color:var(--muted);width:24px;}
+    .cert-name{font-size:1rem;font-weight:700;}
+    .cert-body{font-family:var(--mono);font-size:0.75rem;color:var(--muted);margin-top:0.2rem;}
+    .cert-badge{font-family:var(--mono);font-size:0.65rem;padding:0.3rem 0.8rem;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
+    .cert-badge.done{border:1px solid var(--accent2);color:var(--accent2);}
+    .cert-badge.progress{border:1px solid var(--accent3);color:var(--accent3);}
+    .cert-badge.planned{border:1px solid var(--border);color:var(--muted);}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5px;background:var(--border);border:1px solid var(--border);}
+    .project-card{background:var(--bg);padding:2.5rem;transition:background 0.2s;position:relative;}
+    .project-card:hover{background:#0d1b2a;}
+    .project-card:hover .project-arrow{transform:translate(4px,-4px);}
+    .project-num{font-family:var(--mono);font-size:0.65rem;color:var(--accent);letter-spacing:3px;margin-bottom:1.5rem;}
+    .project-card h3{font-size:1.1rem;font-weight:700;margin-bottom:0.75rem;}
+    .project-card p{font-size:0.9rem;color:var(--muted);line-height:1.7;}
+    .project-arrow{position:absolute;top:2rem;right:2rem;font-size:1.2rem;color:var(--accent);transition:transform 0.2s;}
+    .project-tech{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.5rem;}
+    #contact{background:var(--surface);border-top:1px solid var(--border);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+    .contact-info p{color:var(--muted);line-height:1.8;margin-bottom:2rem;}
+    .contact-links{display:flex;flex-direction:column;gap:1rem;}
+    .contact-link{display:flex;align-items:center;gap:1rem;font-family:var(--mono);font-size:0.75rem;color:var(--text);text-decoration:none;padding:1rem 1.5rem;border:1px solid var(--border);transition:border-color 0.2s,color 0.2s;word-break:break-all;}
+    .contact-link:hover{border-color:var(--accent);color:var(--accent);}
+    .contact-link-icon{font-size:1.1rem;flex-shrink:0;}
+    .contact-form{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+    .form-field{background:var(--bg);}
+    .form-field label{display:block;font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:1rem 1.5rem 0;}
+    .form-field input,.form-field textarea{width:100%;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--sans);font-size:0.95rem;padding:0.5rem 1.5rem 1rem;resize:none;cursor:none;}
+    .form-submit{width:100%;background:var(--accent);color:var(--bg);border:none;font-family:var(--mono);font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;padding:1.2rem;cursor:none;transition:opacity 0.2s;font-weight:700;}
+    .form-submit:hover{opacity:0.85;}
+    .form-msg{font-family:var(--mono);font-size:0.75rem;text-align:center;padding:0.8rem;display:none;}
+    .form-msg.success{color:var(--accent2);background:rgba(0,255,157,0.05);border-top:1px solid rgba(0,255,157,0.2);}
+    .form-msg.error{color:var(--accent3);background:rgba(255,107,53,0.05);border-top:1px solid rgba(255,107,53,0.2);}
+    footer{position:relative;z-index:1;padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-family:var(--mono);font-size:0.72rem;color:var(--muted);}
+    .footer-copy span{color:var(--accent);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    @keyframes spinY{from{transform:translateY(-50%) rotate(0deg);}to{transform:translateY(-50%) rotate(360deg);}}
+    @media(max-width:768px){nav{padding:1rem 1.5rem;}.nav-links{gap:1.2rem;}.nav-links a{font-size:0.65rem;}section{padding:4rem 1.5rem;}#hero{padding:7rem 1.5rem 3rem;}.hero-deco{display:none;}.about-grid,.contact-grid{grid-template-columns:1fr;gap:2rem;}footer{flex-direction:column;text-align:center;}}
+  </style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="nav-logo">MH://PORTFOLIO</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#certs">Certs</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-deco"></div>
+  <p class="hero-tag">// COMPUTER SYSTEM ENGINEERING · UET PESHAWAR</p>
+  <h1 class="hero-name">Muhammad<br><span>Hussain</span></h1>
+  <p class="hero-title">Aspiring Network & Cloud Engineer · <span>Peshawar, Pakistan</span></p>
+  <p class="hero-desc">Undergraduate Computer System Engineering student at UET Peshawar, passionate about advanced networking and cloud technologies. Focused on building expertise in routing & switching, network security, and cloud infrastructure.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn">Hire Me</a>
+    <a href="#projects" class="btn btn-ghost">View Projects</a>
+    <a href="https://github.com/Hussain855" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+  </div>
+  <div class="status-badge"><span class="status-dot"></span>Open to Internships &amp; Entry-Level Networking Roles</div>
+</section>
+
+<section id="about">
+  <p class="section-label">// 00 — ABOUT ME</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2 class="section-title">Who I Am</h2>
+      <p>I'm <span>Muhammad Hussain</span>, a Computer System Engineering undergraduate at the <span>University of Engineering and Technology (UET) Peshawar</span>.</p>
+      <p>My passion lies in <span>networking and cloud technologies</span> — from designing enterprise network topologies to exploring cloud infrastructure on AWS and Azure.</p>
+      <p>I'm actively building hands-on skills through lab simulations in <span>Cisco Packet Tracer and GNS3</span>, and working toward industry certifications like <span>CompTIA Network+</span> and <span>Cisco CCNA</span>.</p>
+      <p>I believe in learning by doing — every packet I capture and every route I configure brings me closer to becoming a professional network engineer.</p>
+    </div>
+    <div>
+      <div class="about-stats">
+        <div class="stat-box"><span class="stat-num">UET</span><span class="stat-label">Peshawar</span></div>
+        <div class="stat-box"><span class="stat-num">CSE</span><span class="stat-label">Engineering</span></div>
+        <div class="stat-box"><span class="stat-num">4+</span><span class="stat-label">Lab Projects</span></div>
+        <div class="stat-box"><span class="stat-num">&#8734;</span><span class="stat-label">Curiosity</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-label">// 01 — TECHNICAL SKILLS</p>
+  <h2 class="section-title">What I Work With</h2>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="skill-card-icon">🔀</div><h3>Routing &amp; Switching</h3><div class="skill-tags"><span class="tag hot">OSPF</span><span class="tag hot">BGP</span><span class="tag hot">EIGRP</span><span class="tag">VLANs</span><span class="tag">STP</span><span class="tag">EtherChannel</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">🔒</div><h3>Network Security</h3><div class="skill-tags"><span class="tag hot">Firewalls</span><span class="tag hot">ACLs</span><span class="tag">VPN</span><span class="tag">IPSec</span><span class="tag">Network Hardening</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">☁️</div><h3>Cloud &amp; Virtualization</h3><div class="skill-tags"><span class="tag hot">AWS</span><span class="tag">Azure</span><span class="tag">VPC Networking</span><span class="tag">VMware</span><span class="tag">GNS3</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">🛠️</div><h3>Tools &amp; Protocols</h3><div class="skill-tags"><span class="tag hot">Wireshark</span><span class="tag hot">Packet Tracer</span><span class="tag">TCP/IP</span><span class="tag">DNS / DHCP</span><span class="tag">SSH</span><span class="tag">Nmap</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">💻</div><h3>Systems &amp; OS</h3><div class="skill-tags"><span class="tag hot">Linux (Ubuntu)</span><span class="tag">Windows Server</span><span class="tag">Cisco IOS</span><span class="tag">Bash Scripting</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">📡</div><h3>Wireless &amp; WAN</h3><div class="skill-tags"><span class="tag hot">Wi-Fi 6</span><span class="tag">MPLS</span><span class="tag">SD-WAN</span><span class="tag">PPPoE</span><span class="tag">RADIUS</span></div></div>
+  </div>
+</section>
+
+<section id="certs">
+  <p class="section-label">// 02 — CERTIFICATIONS</p>
+  <h2 class="section-title">Credentials &amp; Roadmap</h2>
+  <div class="cert-list">
+    <div class="cert-item"><div class="cert-left"><span class="cert-num">01</span><div><div class="cert-name">CompTIA Network+</div><div class="cert-body">CompTIA · Core Networking Fundamentals</div></div></div><span class="cert-badge progress">In Progress</span></div>
+    <div class="cert-item"><div class="cert-left"><span class="cert-num">02</span><div><div class="cert-name">Cisco CCNA</div><div class="cert-body">Cisco Systems · Routing &amp; Switching</div></div></div><span class="cert-badge planned">Planned</span></div>
+    <div class="cert-item"><div class="cert-left"><span class="cert-num">03</span><div><div class="cert-name">CompTIA A+</div><div class="cert-body">CompTIA · IT Support &amp; Hardware</div></div></div><span class="cert-badge planned">Planned</span></div>
+    <div class="cert-item"><div class="cert-left"><span class="cert-num">04</span><div><div class="cert-name">AWS Cloud Practitioner</div><div class="cert-body">Amazon Web Services · Cloud Foundations</div></div></div><span class="cert-badge planned">Planned</span></div>
+    <div class="cert-item"><div class="cert-left"><span class="cert-num">05</span><div><div class="cert-name">Cisco CCNP Enterprise</div><div class="cert-body">Cisco Systems · Advanced Enterprise Networking</div></div></div><span class="cert-badge planned">Future Goal</span></div>
+  </div>
+</section>
+
+<section id="projects">
+  <p class="section-label">// 03 — PROJECTS</p>
+  <h2 class="section-title">Lab Work &amp; Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card"><p class="project-num">PROJECT // 001</p><span class="project-arrow">↗</span><h3>Enterprise Network Simulation</h3><p>Designed a multi-site enterprise network in Cisco Packet Tracer with OSPF routing, inter-VLAN routing, and redundant links using STP.</p><div class="project-tech"><span class="tag hot">Packet Tracer</span><span class="tag">OSPF</span><span class="tag">VLANs</span><span class="tag">STP</span></div></div>
+    <div class="project-card"><p class="project-num">PROJECT // 002</p><span class="project-arrow">↗</span><h3>pfSense Firewall Home Lab</h3><p>Built a virtualized home lab with pfSense as perimeter firewall, configured ACLs, NAT rules, and a site-to-site VPN between two virtual networks.</p><div class="project-tech"><span class="tag hot">pfSense</span><span class="tag">VPN / IPSec</span><span class="tag">VMware</span><span class="tag">ACLs</span></div></div>
+    <div class="project-card"><p class="project-num">PROJECT // 003</p><span class="project-arrow">↗</span><h3>Network Traffic Analysis</h3><p>Captured and analyzed live network traffic using Wireshark to identify protocol behavior, detect anomalies, and study TCP/IP handshake sequences.</p><div class="project-tech"><span class="tag hot">Wireshark</span><span class="tag">TCP/IP</span><span class="tag">Protocol Analysis</span></div></div>
+    <div class="project-card"><p class="project-num">PROJECT // 004</p><span class="project-arrow">↗</span><h3>Linux Server Hardening</h3><p>Configured an Ubuntu server with SSH key authentication, fail2ban, UFW firewall rules, and automated security updates for minimal attack surface.</p><div class="project-tech"><span class="tag hot">Ubuntu</span><span class="tag">SSH</span><span class="tag">UFW</span><span class="tag">fail2ban</span></div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label">// 04 — CONTACT</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2 class="section-title">Let's<br>Connect</h2>
+      <p>Open to internships, entry-level networking roles, and IT support positions. Based in Peshawar — available remotely too. I respond within 24 hours.</p>
+      <div class="contact-links">
+        <a href="mailto:muhammadhussainhng855@gmail.com" class="contact-link"><span class="contact-link-icon">✉</span>muhammadhussainhng855@gmail.com</a>
+        <a href="https://linkedin.com/in/muhammad-hussain-280ba3370" target="_blank" class="contact-link"><span class="contact-link-icon">in</span>linkedin.com/in/muhammad-hussain-280ba3370</a>
+        <a href="https://github.com/Hussain855" target="_blank" class="contact-link"><span class="contact-link-icon">⌥</span>github.com/Hussain855</a>
+      </div>
+    </div>
+    <div>
+      <form id="contactForm" class="contact-form">
+        <input type="hidden" name="access_key" value="f1357aa6-1613-46c6-bb5b-05bbbd555adc"/>
+        <input type="hidden" name="subject" value="New Portfolio Contact — Muhammad Hussain"/>
+        <input type="hidden" name="from_name" value="Muhammad Hussain Portfolio"/>
+        <div class="form-field"><label>Your Name</label><input type="text" name="name" placeholder="John Smith" required/></div>
+        <div class="form-field"><label>Email Address</label><input type="email" name="email" placeholder="john@company.com" required/></div>
+        <div class="form-field"><label>Message</label><textarea name="message" rows="5" placeholder="I'd like to discuss an opportunity..." required></textarea></div>
+        <button type="submit" class="form-submit" id="submitBtn">Send Message →</button>
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>Muhammad Hussain</span> · Computer System Engineering · UET Peshawar</div>
+  <div class="footer-copy">Hosted on <span>GitHub Pages</span> · Built with HTML/CSS</div>
+</footer>
+
+<script>
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx-5+'px';cursor.style.top=my-5+'px';});
+  (function anim(){rx+=(mx-rx-18)*0.12;ry+=(my-ry-18)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+  document.querySelectorAll('a,button,.skill-card,.cert-item,.project-card').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.style.transform='scale(2.5)');el.addEventListener('mouseleave',()=>cursor.style.transform='scale(1)');});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}}),{threshold:0.1});
+  document.querySelectorAll('.skill-card,.cert-item,.project-card,.stat-box').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease,background 0.2s';obs.observe(el);});
+  document.getElementById('contactForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const btn=document.getElementById('submitBtn'),msg=document.getElementById('formMsg');
+    btn.textContent='Sending...';btn.disabled=true;
+    const obj=Object.fromEntries(new FormData(this));
+    try{
+      const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(obj)});
+      const data=await res.json();
+      if(data.success){msg.textContent='✓ Message sent! I will reply within 24 hours.';msg.className='form-msg success';msg.style.display='block';this.reset();btn.textContent='Message Sent ✓';}
+      else throw new Error();
+    }catch{msg.textContent='✗ Something went wrong. Please email me directly.';msg.className='form-msg error';msg.style.display='block';btn.textContent='Send Message →';btn.disabled=false;}
+  });
+</script>
+</body>
+</html>
